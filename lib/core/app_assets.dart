@@ -26,6 +26,10 @@ class AppAssets {
   static final String getStartedTopOverlay = "assets/images/get-started-top-overlay.png";
   static final String getStartedBottomOverlay = "assets/images/get-started-bottom-overlay.png";
 
+  ///Tags
+  static final String spotifyTags = "assets/images/spotify-tags.png";
+
   ///Images
   static final String dummyArtistImage1 = "assets/images/dummy-artist-image.png";
+  static final String dummyShowsImage1 = "assets/images/dummy-shows-image.png";
 }
