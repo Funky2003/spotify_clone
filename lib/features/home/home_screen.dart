@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:spotify_clone/core/app_texts.dart';
+import 'package:spotify_clone/features/notification/notification.dart';
 
 import '../../core/app_assets.dart';
 import '../../core/app_colors.dart';
@@ -59,6 +60,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         IconButton(
                           onPressed: () {
                             ///Todo: Change current playing platform
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (route) {
+                                return const NotificationScreen();
+                              })
+                            );
                           },
                           icon: Image.asset(
                             AppAssets.activeNotificationIcon,
@@ -564,6 +570,1024 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
+
+              ///Try Something New
+              const SizedBox(height: 32.0),
+              SizedBox(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0, bottom: 8.0),
+                      child: AppTexts.bold(
+                        text: "Try something else",
+                        size: 24.0
+                      ),
+                    ),
+
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: List.generate(12, (index) {
+
+                          final startGradientColor = Color.fromARGB(
+                            255,
+                            Random().nextInt(256),
+                            Random().nextInt(256),
+                            Random().nextInt(256),
+                          );
+
+                          final endGradientColor = Color.fromARGB(
+                            255,
+                            Random().nextInt(256),
+                            Random().nextInt(256),
+                            Random().nextInt(256),
+                          );
+
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: SizedBox(
+                              width: 144,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 144,
+                                    height: 144,
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        colors: [
+                                          startGradientColor.withValues(alpha: .8),
+                                          endGradientColor.withValues(alpha: .6)
+                                        ]
+                                      )
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: ImageIcon(
+                                            AssetImage(AppAssets.appIcon),
+                                            size: 12.0,
+                                            color: Colors.white.withValues(alpha: .2),
+                                          ),
+                                        ),
+
+                                        Center(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(4.0),
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                AppTexts.bold(
+                                                  text: "TOP ${100}",
+                                                  color: Colors.white,
+                                                  size: 20.0
+                                                ),
+
+                                                Padding(
+                                                  padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                                                  child: Divider(
+                                                    color: Colors.white.withValues(alpha: .5),
+                                                  ),
+                                                ),
+
+                                                AppTexts.bold(
+                                                  text: "GLOBAL",
+                                                  color: Colors.white
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+
+                                        SizedBox()
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+
+              ///More Like Artist
+              const SizedBox(height: 32.0),
+              SizedBox(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 24,
+                            backgroundImage: AssetImage(AppAssets.dummyArtistImage3),
+                          ),
+
+                          const SizedBox(width: 16.0),
+
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AppTexts.medium(
+                                text: "MORE LIKE",
+                                size: 10.0,
+                                color: AppColors.spotifyGrey
+                              ),
+
+                              AppTexts.bold(
+                                text: "Michael Jackson",
+                                size: 20.0,
+                                color: Colors.white
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: List.generate(7, (index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 114,
+                                  width: 114,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.spotifyGrey,
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                      image: AssetImage(AppAssets.dummyArtistImage2)
+                                    )
+                                  ),
+                                ),
+
+                                const SizedBox(height: 8.0),
+
+                                AppTexts.bold(
+                                  text: "Michael Jackson",
+                                  size: 12.0
+                                )
+                              ],
+                            ),
+                          );
+                        }),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+
+              ///More Like Artist
+              const SizedBox(height: 32.0),
+              SizedBox(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 24,
+                            backgroundImage: AssetImage(AppAssets.dummyArtistImage4),
+                          ),
+
+                          const SizedBox(width: 16.0),
+
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AppTexts.medium(
+                                text: "MORE LIKE",
+                                size: 10.0,
+                                color: AppColors.spotifyGrey
+                              ),
+
+                              AppTexts.bold(
+                                text: "Selena Gomez",
+                                size: 20.0,
+                                color: Colors.white
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: List.generate(7, (index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 114,
+                                  width: 114,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.spotifyGrey,
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                      image: AssetImage(AppAssets.dummyArtistImage5)
+                                    )
+                                  ),
+                                ),
+
+                                const SizedBox(height: 8.0),
+
+                                AppTexts.bold(
+                                    text: "Michael Jackson",
+                                    size: 12.0
+                                )
+                              ],
+                            ),
+                          );
+                        }),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+
+              ///Spotify Exclusives
+              const SizedBox(height: 32.0),
+              SizedBox(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0, bottom: 8.0),
+                      child: AppTexts.bold(
+                        text: "Spotify Original & Exclusive",
+                        size: 24.0
+                      ),
+                    ),
+
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: List.generate(7, (index) {
+                          return Container(
+                            width: 144,
+                            margin: const EdgeInsets.only(left: 16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ///Show thumbnail
+                                Container(
+                                  height: 144,
+                                  width: 144,
+                                  clipBehavior: Clip.hardEdge,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(16.0),
+                                    image: DecorationImage(
+                                      image: AssetImage(AppAssets.dummyCoverImage1)
+                                    )
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        height: 30,
+                                        width: 26,
+                                        decoration: BoxDecoration(
+                                          // color: Colors.green
+                                        ),
+                                        child: Stack(
+                                          children: [
+                                            Positioned(
+                                              top: 0,
+                                              bottom: 0,
+                                              left: 0,
+                                              right: 0,
+                                              child: Image.asset(
+                                                AppAssets.spotifyTags,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+
+                                            Align(
+                                              alignment: Alignment.center,
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(bottom: 8.0, right: 4.0),
+                                                child: ImageIcon(
+                                                  AssetImage(AppAssets.appIcon),
+                                                  size: 13.0,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                                const SizedBox(height: 16.0),
+
+                                ///Show description
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    AppTexts.medium(
+                                        text: "Education",
+                                        size: 10.0,
+                                        color: AppColors.spotifyGreen
+                                    ),
+
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                      child: CircleAvatar(
+                                          radius: 1.5,
+                                          backgroundColor: AppColors.spotifyGreen
+                                      ),
+                                    ),
+
+                                    Expanded(
+                                      child: AppTexts.medium(
+                                        text: "Language Learning",
+                                        size: 10.0,
+                                        color: AppColors.spotifyGreen,
+                                        overflow: TextOverflow.ellipsis
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                                AppTexts.bold(
+                                    text: "Learn Life Skills With Aleena Rais",
+                                    color: Colors.white,
+                                    size: 12.0
+                                ),
+
+                                Text.rich(
+                                    TextSpan(
+                                        style: TextStyle(
+                                          fontSize: 10.0,
+                                          color: AppColors.spotifyGrey,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        children: [
+                                          TextSpan(
+                                              text: "Show . "
+                                          ),
+                                          TextSpan(
+                                              text: "Aleena Rais"
+                                          )
+                                        ]
+                                    )
+                                )
+
+                              ],
+                            ),
+                          );
+                        }),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+
+              ///More Like Artist
+              const SizedBox(height: 32.0),
+              SizedBox(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 24,
+                            backgroundImage: AssetImage(AppAssets.dummyArtistImage6),
+                          ),
+
+                          const SizedBox(width: 16.0),
+
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AppTexts.medium(
+                                text: "MORE LIKE",
+                                size: 10.0,
+                                color: AppColors.spotifyGrey
+                              ),
+
+                              AppTexts.bold(
+                                text: "Tom Odell",
+                                size: 20.0,
+                                color: Colors.white
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: List.generate(7, (index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 114,
+                                  width: 114,
+                                  decoration: BoxDecoration(
+                                      color: AppColors.spotifyGrey,
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                          image: AssetImage(AppAssets.dummyArtistImage7)
+                                      )
+                                  ),
+                                ),
+
+                                const SizedBox(height: 8.0),
+
+                                AppTexts.bold(
+                                  text: "James Bay",
+                                  size: 12.0
+                                )
+                              ],
+                            ),
+                          );
+                        }),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+
+              ///Your Favorites
+              const SizedBox(height: 32.0),
+              SizedBox(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0, bottom: 8.0),
+                      child: AppTexts.bold(
+                        text: "Your Favorite",
+                        size: 24.0
+                      ),
+                    ),
+
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: List.generate(7, (index) {
+
+                          final overlayColor = Color.fromARGB(
+                            255,
+                            Random().nextInt(256),
+                            Random().nextInt(256),
+                            Random().nextInt(256)
+                          ).withValues(alpha: .9);
+
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: SizedBox(
+                              width: 144,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    height: 144,
+                                    width: 144,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage(AppAssets.dummyCoverImage2)
+                                      )
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        SizedBox(
+                                          height: 80,
+                                          width: 110,
+                                          child: Stack(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.all(4.0),
+                                                child: ImageIcon(
+                                                  AssetImage(AppAssets.appIcon),
+                                                  size: 12.0,
+                                                  color: overlayColor,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                                  const SizedBox(height: 8.0),
+
+                                  AppTexts.medium(
+                                    text: "Black Adam (Original Motion Picture Soundtrack)",
+                                    size: 12.0
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+
+              ///More Like Artist
+              const SizedBox(height: 32.0),
+              SizedBox(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 24,
+                            backgroundImage: AssetImage(AppAssets.dummyArtistImage8),
+                          ),
+
+                          const SizedBox(width: 16.0),
+
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AppTexts.medium(
+                                text: "MORE LIKE",
+                                size: 10.0,
+                                color: AppColors.spotifyGrey
+                              ),
+
+                              AppTexts.bold(
+                                text: "Lily Kershaw",
+                                size: 20.0,
+                                color: Colors.white
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: List.generate(7, (index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 114,
+                                  width: 114,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.spotifyGrey,
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                      image: AssetImage(AppAssets.dummyCoverImage3)
+                                    )
+                                  ),
+                                ),
+
+                                const SizedBox(height: 8.0),
+
+                                AppTexts.bold(
+                                  text: "Roni Alter",
+                                  size: 12.0
+                                )
+                              ],
+                            ),
+                          );
+                        }),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+
+              ///Biggest Hits
+              const SizedBox(height: 32.0),
+              SizedBox(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0, bottom: 8.0),
+                      child: AppTexts.bold(
+                        text: "Biggest Hits",
+                        size: 24.0
+                      ),
+                    ),
+
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: List.generate(7, (index) {
+
+                          final overlayColor = Color.fromARGB(
+                            255,
+                            Random().nextInt(256),
+                            Random().nextInt(256),
+                              Random().nextInt(256)
+                          ).withValues(alpha: .9);
+
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: SizedBox(
+                              width: 144,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    height: 144,
+                                    width: 144,
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: AssetImage(AppAssets.dummyCoverImage4)
+                                        )
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        SizedBox(
+                                          height: 80,
+                                          width: 110,
+                                          child: Stack(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.all(4.0),
+                                                child: ImageIcon(
+                                                  AssetImage(AppAssets.appIcon),
+                                                  size: 12.0,
+                                                  color: overlayColor,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                                  const SizedBox(height: 8.0),
+
+                                  AppTexts.medium(
+                                    text: "KGF Chapter 2 (Original Motion Picture Soundtrack)",
+                                    size: 12.0
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+
+              ///More Like Artist
+              const SizedBox(height: 32.0),
+              SizedBox(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 24,
+                            backgroundImage: AssetImage(AppAssets.dummyArtistImage1),
+                          ),
+
+                          const SizedBox(width: 16.0),
+
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AppTexts.medium(
+                                  text: "MORE LIKE",
+                                  size: 10.0,
+                                  color: AppColors.spotifyGrey
+                              ),
+
+                              AppTexts.bold(
+                                text: "Drake",
+                                size: 20.0,
+                                color: Colors.white
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: List.generate(7, (index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 114,
+                                  width: 114,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.spotifyGrey,
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                      image: AssetImage(AppAssets.dummyArtistImage9)
+                                    )
+                                  ),
+                                ),
+
+                                const SizedBox(height: 8.0),
+
+                                AppTexts.bold(
+                                  text: "J. Cole",
+                                  size: 12.0
+                                )
+                              ],
+                            ),
+                          );
+                        }),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+
+              ///Made For You
+              const SizedBox(height: 32.0),
+              SizedBox(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0, bottom: 8.0),
+                      child: AppTexts.bold(
+                        text: "Made For You",
+                        size: 24.0
+                      ),
+                    ),
+
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: List.generate(7, (index) {
+
+                          final overlayColor = Color.fromARGB(
+                              255,
+                              Random().nextInt(256),
+                              Random().nextInt(256),
+                              Random().nextInt(256)
+                          ).withValues(alpha: .9);
+
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: SizedBox(
+                              width: 144,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    height: 144,
+                                    width: 144,
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: AssetImage(AppAssets.dummyCoverImage5)
+                                        )
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        SizedBox(
+                                          height: 80,
+                                          width: 110,
+                                          child: Stack(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.all(4.0),
+                                                child: ImageIcon(
+                                                  AssetImage(AppAssets.appIcon),
+                                                  size: 12.0,
+                                                  color: overlayColor,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                                  const SizedBox(height: 8.0),
+
+                                  AppTexts.medium(
+                                    text: "Taare Zameen Par",
+                                    size: 12.0
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+
+              ///More Like Artist
+              const SizedBox(height: 32.0),
+              SizedBox(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 24,
+                            backgroundImage: AssetImage(AppAssets.dummyArtistProfileImage1),
+                          ),
+
+                          const SizedBox(width: 16.0),
+
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AppTexts.medium(
+                                text: "MORE LIKE",
+                                size: 10.0,
+                                color: AppColors.spotifyGrey
+                              ),
+
+                              AppTexts.bold(
+                                text: "Shawn Mendes",
+                                size: 20.0,
+                                color: Colors.white
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: List.generate(7, (index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 114,
+                                  width: 114,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.spotifyGrey,
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                      image: AssetImage(AppAssets.dummyArtistCoverImage1)
+                                    )
+                                  ),
+                                ),
+
+                                const SizedBox(height: 8.0),
+
+                                AppTexts.bold(
+                                  text: "Ed Sheeran",
+                                  size: 12.0
+                                )
+                              ],
+                            ),
+                          );
+                        }),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+
+              ///Throwback
+              const SizedBox(height: 32.0),
+              SizedBox(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0, bottom: 8.0),
+                      child: AppTexts.bold(
+                        text: "Throwback",
+                        size: 24.0
+                      ),
+                    ),
+
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: List.generate(7, (index) {
+
+                          final overlayColor = Color.fromARGB(
+                            255,
+                            Random().nextInt(256),
+                            Random().nextInt(256),
+                            Random().nextInt(256)
+                          ).withValues(alpha: .9);
+
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: SizedBox(
+                              width: 144,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    height: 144,
+                                    width: 144,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage(AppAssets.dummyCoverImage6)
+                                      )
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        SizedBox(
+                                          height: 80,
+                                          width: 110,
+                                          child: Stack(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.all(4.0),
+                                                child: ImageIcon(
+                                                  AssetImage(AppAssets.appIcon),
+                                                  size: 12.0,
+                                                  color: overlayColor,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                                  const SizedBox(height: 8.0),
+
+                                  AppTexts.medium(
+                                    text: "Arijit Singh, Pritam, A.R. Rahman and more",
+                                    size: 12.0
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+
 
 
               ///Leave a space at the bottom

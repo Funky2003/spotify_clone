@@ -32,4 +32,23 @@ class AppAssets {
   ///Images
   static final String dummyArtistImage1 = "assets/images/dummy-artist-image.png";
   static final String dummyShowsImage1 = "assets/images/dummy-shows-image.png";
+  static final String dummyArtistImage2 = "assets/images/dummy-sam-smith-profile.png";
+  static final String dummyArtistImage3 = "assets/images/dummy-artist-image3.png";
+  static final String dummyArtistImage4 = "assets/images/dummy-artist-image4.png";
+  static final String dummyArtistImage5 = "assets/images/dummy-artist-image5.png";
+  static final String dummyArtistImage6 = "assets/images/dummy-artist-image-6.png";
+  static final String dummyArtistImage7 = "assets/images/dummy-artist-image-7.png";
+  static final String dummyArtistImage9 = "assets/images/dummy-artist-image-8.png";
+  static final String dummyArtistImage8 = "assets/images/dummy-artist-profile-1.png";
+
+  static final String dummyCoverImage1 = "assets/images/dummy-cover-image-1.png";
+  static final String dummyCoverImage3 = "assets/images/dummy-cover-image-2.png";
+  static final String dummyCoverImage4 = "assets/images/dummy-cover-image-3.png";
+  static final String dummyCoverImage5 = "assets/images/dummy-cover-image-4.png";
+  static final String dummyCoverImage6 = "assets/images/Img-9.png";
+  static final String dummyCoverImage2 = "assets/images/black-adam-cover.png";
+  static final String dummyCoverImage7 = "assets/images/unholy-cover-image.png";
+
+  static final String dummyArtistProfileImage1 = "assets/images/dummy-artist-profile.png";
+  static final String dummyArtistCoverImage1 = "assets/images/dummy-image-cover-5.png";
 }

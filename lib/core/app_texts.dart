@@ -23,7 +23,7 @@ class AppTexts {
     );
   }
 
-  static Text medium({required String text, Color? color, double? size}) {
+  static Text medium({required String text, Color? color, double? size, TextOverflow? overflow}) {
     return Text(
       text,
       style: TextStyle(
@@ -31,6 +31,7 @@ class AppTexts {
         fontWeight: FontWeight.w500,
         fontSize: size
       ),
+      overflow: overflow,
     );
   }
 }
