@@ -41,6 +41,7 @@ class AppAssets {
   static final String dummyArtistImage9 = "assets/images/dummy-artist-image-8.png";
   static final String dummyArtistImage8 = "assets/images/dummy-artist-profile-1.png";
   static final String dummyPodcastCover = "assets/images/dummy-podcast-cover.png";
+  static final String dummyMjCover = "assets/images/mj-dangerous-cover.png";
 
   static final String musicBars = "assets/images/music-bars.png";
 

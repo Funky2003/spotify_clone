@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:spotify_clone/core/app_texts.dart';
 import 'package:spotify_clone/features/home/screens/notification/notification.dart';
 import 'package:spotify_clone/features/home/screens/recent/recently_played_screen.dart';
+import 'package:spotify_clone/features/settings/settings_screen.dart';
 import '../../core/app_assets.dart';
 import '../../core/app_colors.dart';
 
@@ -59,7 +60,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         IconButton(
                           onPressed: () {
-                            ///Todo: Change current playing platform
                             Navigator.of(context).push(
                               MaterialPageRoute(builder: (route) {
                                 return const NotificationScreen();
@@ -73,7 +73,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         IconButton(
                           onPressed: () {
-                            ///Todo: Change current playing platform
                             Navigator.of(context).push(
                               MaterialPageRoute(builder: (route) {
                                 return const RecentlyPlayedScreen();
@@ -87,7 +86,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         IconButton(
                           onPressed: () {
-                            ///Todo: Change current playing platform
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (route) {
+                                return const SettingsScreen();
+                              })
+                            );
                           },
                           icon: ImageIcon(
                             AssetImage(AppAssets.settingsIcon),
