@@ -3,7 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:spotify_clone/core/app_assets.dart';
 import 'package:spotify_clone/core/app_colors.dart';
 import 'package:spotify_clone/core/app_texts.dart';
+import 'package:spotify_clone/features/album/album_songs_screen.dart';
 import 'package:spotify_clone/features/library/screens/liked_songs/liked_songs_screen.dart';
+import 'package:spotify_clone/features/playlist/playlist_screen.dart';
 
 class RecentlyPlayedScreen extends StatefulWidget {
   const RecentlyPlayedScreen({super.key});
@@ -375,9 +377,9 @@ class _RecentlyPlayedScreenState extends State<RecentlyPlayedScreen> {
                         Column(
                           children: List.generate(1, (index) {
                             return ListTile(
-                              onTap: () {
-                                ///Todo: Navigate to artist's profile
-                              },
+                              onTap: () => Navigator.of(context).push(
+                                MaterialPageRoute(builder: (route) => const AlbumSongsScreen())
+                              ),
                               leading: Container(
                                 height: 48,
                                 width: 48,
@@ -415,9 +417,11 @@ class _RecentlyPlayedScreenState extends State<RecentlyPlayedScreen> {
                     const SizedBox(height: 8.0),
 
                     InkWell(
-                      onTap: () {
-                        ///Todo:
-                      },
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(builder: (route) {
+                          return const PlaylistScreen();
+                        })
+                      ),
                       child: Row(
                         children: [
                           Container(

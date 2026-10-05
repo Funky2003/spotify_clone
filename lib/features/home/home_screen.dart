@@ -2,8 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:spotify_clone/core/app_texts.dart';
+import 'package:spotify_clone/features/album/album_songs_screen.dart';
 import 'package:spotify_clone/features/home/screens/notification/notification.dart';
 import 'package:spotify_clone/features/home/screens/recent/recently_played_screen.dart';
+import 'package:spotify_clone/features/library/screens/liked_songs/liked_songs_screen.dart';
 import 'package:spotify_clone/features/settings/settings_screen.dart';
 import '../../core/app_assets.dart';
 import '../../core/app_colors.dart';
@@ -120,50 +122,23 @@ class _HomeScreenState extends State<HomeScreen> {
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        children: List.generate(7, (index) {
-
-                          final isFirst = index == 0;
-
-                          final isArtist = (index % 2) == 0;
-
-                          if (isArtist && !isFirst) {
-                            return Padding(
-                              padding: const EdgeInsets.only(left: 16.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    height: 114,
-                                    width: 114,
-                                    decoration: BoxDecoration(
-                                      color: AppColors.spotifyGrey,
-                                      shape: BoxShape.circle
-                                    ),
-                                  ),
-
-                                  const SizedBox(height: 8.0),
-
-                                  AppTexts.bold(
-                                    text: "Michael Jackson",
-                                    size: 12.0
-                                  )
-                                ],
-                              ),
-                            );
-                          }
-
-                          return Padding(
+                        children: [
+                          Padding(
                             padding: const EdgeInsets.only(left: 16.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
-                                  height: 114,
-                                  width: 114,
-                                  decoration: BoxDecoration(
-                                      color: Colors.green,
-                                      gradient: isFirst
-                                          ? LinearGradient(
+                                GestureDetector(
+                                  onTap: () => Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (route) {
+                                      return const LikedSongsScreen();
+                                    })
+                                  ),
+                                  child: Container(
+                                    height: 114,
+                                    width: 114,
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                           colors: [
@@ -172,16 +147,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                             const Color(0xEEC0EAC9).withValues(alpha: .74)
                                           ]
                                       )
-                                          : null
-                                  ),
-                                  child: isFirst
-                                      ? Center(
-                                    child: Image.asset(
-                                      AppAssets.filledFavoriteIcon,
-                                      height: 42,
                                     ),
-                                  )
-                                      : SizedBox.shrink(),
+                                    child: Center(
+                                      child: Image.asset(
+                                        AppAssets.filledFavoriteIcon,
+                                        height: 42,
+                                      ),
+                                    )
+                                  ),
                                 ),
 
                                 const SizedBox(height: 8.0),
@@ -192,9 +165,99 @@ class _HomeScreenState extends State<HomeScreen> {
                                 )
                               ],
                             ),
-                          );
-                        }),
-                      ),
+                          ),
+
+                          Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                GestureDetector(
+                                  onTap: () => Navigator.of(context).push(
+                                      MaterialPageRoute(builder: (route) {
+                                        return const AlbumSongsScreen();
+                                      })
+                                  ),
+                                  child: Container(
+                                    height: 114,
+                                    width: 114,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage(AppAssets.dummyMjCover)
+                                      )
+                                    )
+                                  ),
+                                ),
+
+                                const SizedBox(height: 8.0),
+
+                                AppTexts.bold(
+                                  text: "Dangerous", ///Todo: From backend
+                                  size: 12.0
+                                )
+                              ],
+                            ),
+                          ),
+
+                          Row(
+                            children: List.generate(7, (index) {
+
+                              final isFirst = index == 0;
+
+                              final isArtist = (index % 2) == 0;
+
+                              if (isArtist && !isFirst) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(left: 16.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        height: 114,
+                                        width: 114,
+                                        decoration: BoxDecoration(
+                                          color: AppColors.spotifyGrey,
+                                          shape: BoxShape.circle
+                                        ),
+                                      ),
+
+                                      const SizedBox(height: 8.0),
+
+                                      AppTexts.bold(
+                                        text: "Michael Jackson",
+                                        size: 12.0
+                                      )
+                                    ],
+                                  ),
+                                );
+                              }
+
+                              return Padding(
+                                padding: const EdgeInsets.only(left: 16.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      height: 114,
+                                      width: 114,
+                                      decoration: BoxDecoration(
+                                        color: Colors.green,
+                                      ),
+                                    ),
+
+                                    const SizedBox(height: 8.0),
+
+                                    AppTexts.bold(
+                                      text: "For you",
+                                      size: 12.0
+                                    )
+                                  ],
+                                ),
+                              );
+                            }),
+                          ),
+                        ],
+                      )
                     )
                   ],
                 ),

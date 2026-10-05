@@ -12,18 +12,34 @@ class AppTexts {
     );
   }
 
-  static Text bold({required String text, Color? color, double? size}) {
+  static Text bold({required String text, Color? color, double? size, TextAlign? align, TextOverflow? overflow, int? maxLines}) {
     return Text(
       text,
       style: TextStyle(
         color: color ?? CupertinoColors.white,
         fontWeight: FontWeight.bold,
-        fontSize: size
+        fontSize: size,
+        overflow: overflow
       ),
+      textAlign: align,
+      maxLines: maxLines,
     );
   }
 
-  static Text medium({required String text, Color? color, double? size, TextOverflow? overflow}) {
+  static Text black({required String text, Color? color, double? size, TextAlign? align, double? height}) {
+    return Text(
+      text,
+      style: TextStyle(
+        color: color ?? CupertinoColors.white,
+        fontWeight: FontWeight.w900,
+        fontSize: size,
+        height: height
+      ),
+      textAlign: align,
+    );
+  }
+
+  static Text medium({required String text, Color? color, double? size, TextOverflow? overflow, int? maxLines}) {
     return Text(
       text,
       style: TextStyle(
@@ -32,6 +48,7 @@ class AppTexts {
         fontSize: size
       ),
       overflow: overflow,
+      maxLines: maxLines,
     );
   }
 }

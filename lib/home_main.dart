@@ -3,6 +3,7 @@ import 'package:spotify_clone/core/app_assets.dart';
 import 'package:spotify_clone/core/app_colors.dart';
 import 'package:spotify_clone/core/app_texts.dart';
 import 'package:spotify_clone/features/home/home_screen.dart';
+import 'package:spotify_clone/features/search/search_screen.dart';
 
 class HomeMain extends StatefulWidget {
   const HomeMain({super.key});
@@ -20,17 +21,8 @@ class _HomeMainState extends State<HomeMain> {
   double _sliderValue = 0.0;
 
   final List<Widget> _pages = [
-    HomeScreen(),
-    Center(
-        child: Text(
-          "Search",
-          style: TextStyle(
-              fontSize: 48.0,
-              fontWeight: FontWeight.bold,
-              color: Colors.white
-          ),
-        )
-    ),
+    const HomeScreen(),
+    const SearchScreen(),
     Center(
         child: Text(
           "Library",

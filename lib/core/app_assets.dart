@@ -1,6 +1,12 @@
 class AppAssets {
 
   static final String appIcon = "assets/icons/app_icon.png";
+  static final String verifiedBadge = "assets/icons/verified-badge.png";
+  static final String addMusicIcon = "assets/icons/add-music-icon.png";
+
+  ///Social icons
+  static final String twitterIcon = "assets/icons/twitter-icon.png";
+  static final String instagramIcon = "assets/icons/instagram-icon.png";
 
   ///Bottom nav icons
   static final String home = "assets/icons/navbar_icons/Home Icon.png";
@@ -45,6 +51,7 @@ class AppAssets {
 
   static final String musicBars = "assets/images/music-bars.png";
 
+  static final String dummyArtImage = "assets/images/dummyArtImage.png";
   static final String dummyCoverImage1 = "assets/images/dummy-cover-image-1.png";
   static final String dummyCoverImage3 = "assets/images/dummy-cover-image-2.png";
   static final String dummyCoverImage4 = "assets/images/dummy-cover-image-3.png";
@@ -55,4 +62,6 @@ class AppAssets {
 
   static final String dummyArtistProfileImage1 = "assets/images/dummy-artist-profile.png";
   static final String dummyArtistCoverImage1 = "assets/images/dummy-image-cover-5.png";
+
+  static final String searchCover = "assets/images/dummy-search-cover.png";
 }
