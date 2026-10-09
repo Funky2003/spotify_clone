@@ -39,7 +39,7 @@ class AppTexts {
     );
   }
 
-  static Text medium({required String text, Color? color, double? size, TextOverflow? overflow, int? maxLines}) {
+  static Text medium({required String text, Color? color, double? size, TextOverflow? overflow, int? maxLines, TextAlign? align}) {
     return Text(
       text,
       style: TextStyle(
@@ -47,6 +47,7 @@ class AppTexts {
         fontWeight: FontWeight.w500,
         fontSize: size
       ),
+      textAlign: align,
       overflow: overflow,
       maxLines: maxLines,
     );
