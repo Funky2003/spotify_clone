@@ -2,9 +2,12 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:spotify_clone/core/app_assets.dart';
 import 'package:spotify_clone/core/app_colors.dart';
 import 'package:spotify_clone/core/app_texts.dart';
+import 'package:spotify_clone/features/podcast/podcast_session_screen.dart';
+import 'package:spotify_clone/features/releases/new_releases.dart';
 import 'package:spotify_clone/features/search/screens/search_active_screen.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -15,13 +18,36 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+
+  final List<String> spotifyPodcastCategories = [
+    'Arts',
+    'Business',
+    'Comedy',
+    'New Releases',
+    'Fiction',
+    'Government',
+    'Health & Fitness',
+    'History',
+    'Kids & Family',
+    'Leisure',
+    'Music',
+    'News',
+    'Religion & Spirituality',
+    'Science',
+    'Society & Culture',
+    'Sports',
+    'Technology',
+    'True Crime',
+    'TV & Film',
+  ];
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
-
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16),
@@ -91,61 +117,80 @@ class _SearchScreenState extends State<SearchScreen> {
                         ),
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        children: List.generate(13, (index) {
-                          return Container(
-                            width: 120.0,
-                            clipBehavior: Clip.hardEdge,
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(
-                                255,
-                                Random().nextInt(256),
-                                Random().nextInt(256),
-                                Random().nextInt(256)
-                              ),
-                              borderRadius: BorderRadius.circular(4.0)
-                            ),
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  bottom: -6,
-                                  right: -12,
-                                  child: Transform.rotate(
-                                    angle: -20,
-                                    child: Container(
-                                      height: 74,
-                                      width: 74,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: AssetImage(AppAssets.searchCover)
+                        children: [
+                          ...spotifyPodcastCategories.map((category) {
+
+                            final isNewReleases = spotifyPodcastCategories[3] == category;
+
+                            return GestureDetector(
+                              onTap: () {
+                                HapticFeedback.vibrate();
+
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (route) {
+
+                                    if (isNewReleases) return NewReleasesScreen();
+
+                                    return PodcastSessionScreen(title: category);
+                                  })
+                                );
+                              },
+                              child: Container(
+                                width: 120.0,
+                                clipBehavior: Clip.hardEdge,
+                                decoration: BoxDecoration(
+                                    color: Color.fromARGB(
+                                        255,
+                                        Random().nextInt(256),
+                                        Random().nextInt(256),
+                                        Random().nextInt(256)
+                                    ),
+                                    borderRadius: BorderRadius.circular(4.0)
+                                ),
+                                child: Stack(
+                                  children: [
+                                    Positioned(
+                                      bottom: -6,
+                                      right: -12,
+                                      child: Transform.rotate(
+                                        angle: -20,
+                                        child: Container(
+                                          height: 74,
+                                          width: 74,
+                                          decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  image: AssetImage(AppAssets.searchCover)
+                                              ),
+                                              borderRadius: BorderRadius.circular(12),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    color: Colors.black.withValues(alpha: .5),
+                                                    offset: Offset(0, 4),
+                                                    blurRadius: 4
+                                                )
+                                              ]
+                                          ),
                                         ),
-                                        borderRadius: BorderRadius.circular(12),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black.withValues(alpha: .5),
-                                            offset: Offset(0, 4),
-                                            blurRadius: 4
-                                          )
-                                        ]
                                       ),
                                     ),
-                                  ),
-                                ),
 
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: AppTexts.bold(
-                                      text: "Podcast", ///Todo: From backend
-                                      size: 14.0,
-                                      color: Colors.white
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          );
-                        }),
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: AppTexts.bold(
+                                            text: category, ///Todo: From backend
+                                            size: 14.0,
+                                            color: Colors.white
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          })
+                        ]
                       ),
                     ),
 
