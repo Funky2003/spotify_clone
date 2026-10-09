@@ -552,9 +552,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                           color: AppColors.spotifyGrey,
                         ),
                         title: AppTexts.bold(
-                            text: item.label,
-                            size: 14,
-                            color: Colors.white
+                          text: item.label,
+                          size: 14,
+                          color: Colors.white
                         ),
                       );
                     }),
