@@ -5,7 +5,7 @@ import 'package:spotify_clone/core/app_texts.dart';
 import 'package:spotify_clone/features/album/album_songs_screen.dart';
 import 'package:spotify_clone/features/home/screens/notification/notification.dart';
 import 'package:spotify_clone/features/home/screens/recent/recently_played_screen.dart';
-import 'package:spotify_clone/features/library/screens/liked_songs/liked_songs_screen.dart';
+import 'package:spotify_clone/features/library/screens/liked_songs_screen.dart';
 import 'package:spotify_clone/features/settings/settings_screen.dart';
 import '../../core/app_assets.dart';
 import '../../core/app_colors.dart';

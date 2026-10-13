@@ -4,7 +4,7 @@ import 'package:spotify_clone/core/app_assets.dart';
 import 'package:spotify_clone/core/app_colors.dart';
 import 'package:spotify_clone/core/app_texts.dart';
 import 'package:spotify_clone/features/album/album_songs_screen.dart';
-import 'package:spotify_clone/features/library/screens/liked_songs/liked_songs_screen.dart';
+import 'package:spotify_clone/features/library/screens/liked_songs_screen.dart';
 import 'package:spotify_clone/features/playlist/playlist_screen.dart';
 
 class RecentlyPlayedScreen extends StatefulWidget {

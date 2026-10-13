@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:spotify_clone/core/app_assets.dart';
 import 'package:spotify_clone/core/app_colors.dart';
 
-import '../../../../core/app_texts.dart';
+import '../../../core/app_texts.dart';
 
 class LikedSongsScreen extends StatefulWidget {
   const LikedSongsScreen({super.key});
