@@ -3,10 +3,23 @@ class AppAssets {
   static final String appIcon = "assets/icons/app_icon.png";
   static final String verifiedBadge = "assets/icons/verified-badge.png";
   static final String addMusicIcon = "assets/icons/add-music-icon.png";
+  static final String blendIcon = "assets/icons/blend-icon.png";
+  static final String phoneIcon = "assets/icons/phone-device.png";
+
+  static final String keyboardArrowDownIcon = "assets/icons/arrow-down-icon.png";
 
   ///Social icons
   static final String twitterIcon = "assets/icons/twitter-icon.png";
   static final String instagramIcon = "assets/icons/instagram-icon.png";
+
+  ///Now playing
+  static final String nextIcon = 'assets/icons/now-playing-action-icons/Next.png';
+  static final String prevIcon = 'assets/icons/now-playing-action-icons/Previous.png';
+  static final String repeatIcon = 'assets/icons/now-playing-action-icons/Repeat.png';
+  static final String shuffleIcon = 'assets/icons/now-playing-action-icons/Shuffle.png';
+
+  static final String shareIcon = 'assets/icons/now-playing-action-icons/share.png';
+  static final String listIcon = 'assets/icons/now-playing-action-icons/Vector.png';
 
   ///Bottom nav icons
   static final String home = "assets/icons/navbar_icons/Home Icon.png";
@@ -61,6 +74,8 @@ class AppAssets {
   static final String dummyCoverImage6 = "assets/images/Img-9.png";
   static final String dummyCoverImage2 = "assets/images/black-adam-cover.png";
   static final String dummyCoverImage7 = "assets/images/unholy-cover-image.png";
+
+  static final String dummyCoverPremium = "assets/images/dummy-premium-bg.png";
 
   static final String dummyArtistProfileImage1 = "assets/images/dummy-artist-profile.png";
   static final String dummyArtistCoverImage1 = "assets/images/dummy-image-cover-5.png";

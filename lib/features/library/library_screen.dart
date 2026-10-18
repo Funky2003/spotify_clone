@@ -5,9 +5,12 @@ import 'package:spotify_clone/core/app_colors.dart';
 import 'package:spotify_clone/core/app_texts.dart';
 import 'package:spotify_clone/features/album/album_songs_screen.dart';
 import 'package:spotify_clone/features/artist/artist_screen.dart';
+import 'package:spotify_clone/features/library/screens/blend_screen.dart';
 import 'package:spotify_clone/features/library/screens/liked_songs_screen.dart';
 import 'package:spotify_clone/features/library/screens/local_files_screen.dart';
+import 'package:spotify_clone/features/library/screens/new_episodes_screen.dart';
 import 'package:spotify_clone/features/library/screens/your_episodes_screen.dart';
+import 'package:spotify_clone/features/playlist/new_playlist_screen.dart';
 import 'package:spotify_clone/features/playlist/playlist_screen.dart';
 import 'package:spotify_clone/features/podcast/podcast_details.dart';
 
@@ -20,7 +23,6 @@ class LibraryScreen extends StatefulWidget {
 }
 
 class _LibraryScreenState extends State<LibraryScreen> {
-
 
   final List<String> libraryCategories = [
     'Playlists',
@@ -53,6 +55,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
     "add podcast",
   ];
 
+  bool _showGrid = true;
 
   @override
   Widget build(BuildContext context) {
@@ -87,13 +90,98 @@ class _LibraryScreenState extends State<LibraryScreen> {
                   ),
 
                   IconButton(
-                      onPressed: () {
-                        ///Todo: Add
-                      },
-                      icon: Icon(
-                        CupertinoIcons.plus,
-                        color: Colors.white,
-                      )
+                    onPressed: () {
+                      ///Todo: Add
+                      showModalBottomSheet(
+                        constraints: BoxConstraints(
+                          minWidth: double.infinity
+                        ),
+                        backgroundColor: const Color(0xEE242424).withValues(alpha: 1),
+                        showDragHandle: true,
+                        context: context,
+                        builder: (context) {
+                          return Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+
+                              AppTexts.bold(
+                                text: "Create",
+                                size: 16.0,
+                                color: Colors.white
+                              ),
+
+                              Padding(
+                                padding: const .symmetric(vertical: 16.0),
+                                child: Divider(
+                                  color: AppColors.spotifyGrey,
+                                ),
+                              ),
+
+                              ListTile(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (route) => const NewPlaylistScreen())
+                                  ).then((_) {
+                                    if (context.mounted) {
+                                      Navigator.pop(context);
+                                    }
+                                  });
+                                },
+                                leading: Icon(
+                                  CupertinoIcons.music_note_2,
+                                  color: AppColors.spotifyGrey,
+                                ),
+                                title: AppTexts.bold(
+                                  text: "Playlist",
+                                  size: 16.0,
+                                  color: Colors.white
+                                ),
+                                subtitle: AppTexts.medium(
+                                  text: "Add songs to a new playlist",
+                                  size: 12.0,
+                                  color: AppColors.spotifyGrey
+                                ),
+                              ),
+
+                              ListTile(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (route) => const BlendScreen())
+                                  ).then((_) {
+                                    if (context.mounted) {
+                                      Navigator.pop(context);
+                                    }
+                                  });
+                                },
+                                leading: ImageIcon(
+                                  AssetImage(AppAssets.blendIcon),
+                                  color: AppColors.spotifyGrey,
+                                ),
+                                title: AppTexts.bold(
+                                  text: "Blend",
+                                  size: 16.0,
+                                  color: Colors.white
+                                ),
+                                subtitle: AppTexts.medium(
+                                  text: "Combine tastes in a shared playlist with friends",
+                                  size: 12.0,
+                                  color: AppColors.spotifyGrey
+                                ),
+                              ),
+
+
+
+                              ///Leave space at bottom
+                              const SizedBox(height: 40)
+                            ],
+                          );
+                        }
+                      );
+                    },
+                    icon: Icon(
+                      CupertinoIcons.plus,
+                      color: Colors.white,
+                    )
                   )
                 ],
               ),
@@ -158,11 +246,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 ),
 
                 IconButton(
-                  onPressed: () {
-                    ///Todo:
-                  },
+                  onPressed: () => setState(() => _showGrid = !_showGrid),
                   icon: Icon(
-                    Icons.list,
+                    _showGrid ? Icons.grid_view_outlined : Icons.list_outlined,
                     color: Colors.white,
                   )
                 )
@@ -170,113 +256,172 @@ class _LibraryScreenState extends State<LibraryScreen> {
             ),
 
             ///Grid items
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32.0),
-              child: GridView(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 24.0,
-                  mainAxisSpacing: 32.0,
-                  childAspectRatio: .8
+            if (_showGrid) ...[
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32.0),
+                child: GridView(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 24.0,
+                      mainAxisSpacing: 32.0,
+                      childAspectRatio: .8
+                  ),
+                  children: List.generate(spotifyLibrary.length, (index) {
+
+                    if (spotifyLibrary[index] == "Liked Songs") {
+                      return _buildLikedSongsContainer();
+                    }
+
+                    if (spotifyLibrary[index] == "Local Files") {
+                      return _buildLocalFilesContainer();
+                    }
+
+                    if (spotifyLibrary[index] == "Your Episodes" || spotifyLibrary[index] == "New Episodes") {
+                      return _buildEpisodesContainer(title: spotifyLibrary[index]);
+                    }
+
+                    if (spotifyLibrary[index] == "Playlists") {
+                      return _buildPlaylistsContainer();
+                    }
+
+                    if (spotifyLibrary[index] == "Album") {
+                      return _buildAlbumContainer();
+                    }
+
+                    if (spotifyLibrary[index] == "Podcast") {
+                      return _buildPodcastContainer();
+                    }
+
+                    if (spotifyLibrary[index] == "Artist") {
+                      return _buildArtistContainer();
+                    }
+
+                    if (spotifyLibrary[index] == "add artist") {
+                      return _buildAddArtistContainer();
+                    }
+
+                    if (spotifyLibrary[index] == "add podcast") {
+                      return _buildAddPodcastAndShowsContainer();
+                    }
+
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          height: 180,
+                          decoration: BoxDecoration(
+                              color: CupertinoColors.systemYellow
+                          ),
+                        ),
+
+                        const SizedBox(height: 16.0),
+
+                        AppTexts.medium(
+                            text: "Liked Songs",
+                            color: Colors.white
+                        ),
+
+                        const SizedBox(height: 4.0),
+
+                        Row(
+                          children: [
+                            Transform.rotate(
+                              angle: 120,
+                              child: Icon(
+                                Icons.push_pin_rounded,
+                                color: AppColors.spotifyGreen,
+                                size: 18.0,
+                              ),
+                            ),
+
+                            const SizedBox(width: 2),
+
+                            Icon(
+                              Icons.download_for_offline,
+                              color: AppColors.spotifyGreen,
+                              size: 16.0,
+                            ),
+
+                            const SizedBox(width: 2),
+
+                            Expanded(
+                              child: AppTexts.medium(
+                                  text: "Playlist • 22 tracks",
+                                  size: 12.0,
+                                  color: AppColors.spotifyGrey,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    );
+                  }),
                 ),
-                children: List.generate(spotifyLibrary.length, (index) {
-
-                  if (spotifyLibrary[index] == "Liked Songs") {
-                    return _buildLikedSongsContainer();
-                  }
-
-                  if (spotifyLibrary[index] == "Local Files") {
-                    return _buildLocalFilesContainer();
-                  }
-
-                  if (spotifyLibrary[index] == "Your Episodes" || spotifyLibrary[index] == "New Episodes") {
-                    return _buildEpisodesContainer(title: spotifyLibrary[index]);
-                  }
-
-                  if (spotifyLibrary[index] == "Playlists") {
-                    return _buildPlaylistsContainer();
-                  }
-                  
-                  if (spotifyLibrary[index] == "Album") {
-                    return _buildAlbumContainer();
-                  }
-                  
-                  if (spotifyLibrary[index] == "Podcast") {
-                    return _buildPodcastContainer();
-                  }
-
-                  if (spotifyLibrary[index] == "Artist") {
-                    return _buildArtistContainer();
-                  }
-
-                  if (spotifyLibrary[index] == "add artist") {
-                    return _buildAddArtistContainer();
-                  }
-
-                  if (spotifyLibrary[index] == "add podcast") {
-                    return _buildAddPodcastAndShowsContainer();
-                  }
-
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        height: 180,
+              ),
+            ] else ...[
+              Column(
+                children: List.generate(11, (index) {
+                  return Padding(
+                    padding: .only(bottom: 8.0),
+                    child: ListTile(
+                      contentPadding: .only(left: 8.0),
+                      leading: Container(
+                        height: 64,
+                        width: 64,
                         decoration: BoxDecoration(
-                          color: CupertinoColors.systemYellow
+                          gradient: LinearGradient(
+                            begin: .topLeft,
+                            end: .bottomRight,
+                            colors: [
+                              const Color(0xEE4202F5).withValues(alpha: .74),
+                              const Color(0xEECA9AF0).withValues(alpha: .5),
+                              const Color(0xEECA9AF0).withValues(alpha: .51),
+                              const Color(0xEEC0EAC9).withValues(alpha: 74),
+                            ]
+                          )
+                        ),
+                        child: Center(
+                          child: ImageIcon(
+                            AssetImage(AppAssets.filledFavoriteIcon),
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-
-                      const SizedBox(height: 16.0),
-
-                      AppTexts.medium(
+                      title: AppTexts.medium(
                         text: "Liked Songs",
+                        size: 14,
                         color: Colors.white
                       ),
-
-                      const SizedBox(height: 4.0),
-
-                      Row(
+                      subtitle: Row(
                         children: [
                           Transform.rotate(
                             angle: 120,
                             child: Icon(
                               Icons.push_pin_rounded,
+                              size: 14.0,
                               color: AppColors.spotifyGreen,
-                              size: 18.0,
                             ),
                           ),
 
-                          const SizedBox(width: 2),
+                          const SizedBox(width: 4.0),
 
-                          Icon(
-                            Icons.download_for_offline,
-                            color: AppColors.spotifyGreen,
-                            size: 16.0,
-                          ),
-
-                          const SizedBox(width: 2),
-
-                          Expanded(
-                            child: AppTexts.medium(
-                              text: "Playlist • 22 tracks",
-                              size: 12.0,
-                              color: AppColors.spotifyGrey,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis
-                            ),
+                          AppTexts.medium(
+                              text: "Playlist • ${10} songs",///Todo: No. from backend
+                              size: 12,
+                              color: Colors.grey
                           )
                         ],
-                      )
-                    ],
+                      ),
+                    ),
                   );
                 }),
-              ),
-            ),
-
+              )
+            ],
 
             ///Leave a space at the bottom
             const SizedBox(height: 240)
@@ -321,8 +466,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
           const SizedBox(height: 16.0),
 
           AppTexts.medium(
-              text: "Liked Songs",
-              color: Colors.white
+            text: "Liked Songs",
+            color: Colors.white
           ),
 
           const SizedBox(height: 4.0),
@@ -440,7 +585,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (route) {
-                return const YourEpisodesScreen();
+                if (isYourEpisode) {
+                  return const YourEpisodesScreen();
+                } else {
+                  return const NewEpisodesScreen();
+                }
               })
             );
           },
